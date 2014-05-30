@@ -1,0 +1,15 @@
+{
+    "name": "Force.com-proxy",
+    "description": "Force.com proxy server using forcetk.js library",
+    "version": "1.0.0",
+    "private": true,
+	"author": {
+		"name": "Raphael Daguenet",
+	    "email": "raphael.daguenet@gmail.com"
+	},
+    "dependencies": {
+        "express": "4.3.*",
+        "body-parser": "1.2.*",
+        "request": "2.36.*"
+    }
+}
