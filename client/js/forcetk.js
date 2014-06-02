@@ -184,6 +184,7 @@ if (forcetk.Client === undefined) {
                 if (that.proxyUrl !== null) {
                     xhr.setRequestHeader('SalesforceProxy-Endpoint', url);
                 }
+                xhr.setRequestHeader('Access-Control-Allow-Origin','*');
                 xhr.setRequestHeader(that.authzHeader, "OAuth " + that.sessionId);
                 xhr.setRequestHeader('X-User-Agent', 'salesforce-toolkit-rest-javascript/' + that.apiVersion);
             }
