@@ -1,12 +1,24 @@
 var express = require('express'),
-    http = require('http'),
+    fs = require('fs'),
+    https = require('https'),
     request = require('request'),
     bodyParser = require('body-parser');
+
+var options = {
+    key: fs.readFileSync('./ssl/server.key'),
+    cert: fs.readFileSync('./ssl/server.crt')
+};
 
 var app = express();
 
 app.use(express.static(__dirname + '/client'));
 app.use(bodyParser());
+
+app.all('/', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
 
 app.all('/proxy', function(req, res) {
     var url = req.header('SalesforceProxy-Endpoint');
@@ -26,4 +38,4 @@ app.all('/proxy', function(req, res) {
 });
 
 console.log('Listening on port 3000...');
-http.createServer(app).listen(3000);
+https.createServer(options, app).listen(3000);
