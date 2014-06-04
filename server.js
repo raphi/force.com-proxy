@@ -11,19 +11,21 @@ var options = {
 
 var app = express();
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "SalesforceProxy-Endpoint,X-User-Agent,Content-Type,X-Authorization");
+  next();
+});
+
 app.use(express.static(__dirname + '/client'));
 app.use(bodyParser());
 
-app.all('/', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next();
-});
-
-app.all('/proxy', function(req, res) {
+app.post('/proxy', function(req, res) {
     var url = req.header('SalesforceProxy-Endpoint');
     
     console.log("proxying:", req.method, url);
+    console.log("method:", req.method);
+    console.log("body:", req.body);
 
     request({ 
     	url: url,
