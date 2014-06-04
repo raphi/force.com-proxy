@@ -24,7 +24,6 @@ app.post('/proxy', function(req, res) {
     var url = req.header('SalesforceProxy-Endpoint');
     
     console.log("proxying:", req.method, url);
-    console.log("method:", req.method);
     console.log("body:", req.body);
 
     request({ 
